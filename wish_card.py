@@ -1,6 +1,6 @@
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from QtGui import QPainter, QBrush, QPen
+from PyQt5.QtGui import QPainter, QBrush, QPen
 from PyQt5.QtCore import Qt
 
 import sys
@@ -14,8 +14,8 @@ class Window(QMainWindow):
         self.width = 500
         self.height = 500
         self.InitWindow()
-
-  def InitWindow(self):
+        
+    def InitWindow(self):
         self.setWindowTitle(self.title)
         self.setGeometry(self.top, self.left, self.width, self.height)
         self.show()     
@@ -26,8 +26,8 @@ class Window(QMainWindow):
         painter.drawRect(40, 40, 400, 200)
   
 if __name__ == "__main__":
-  App = QApplication(sys.argv)
-  window = Window()
-  sys.exit(App.exec())
+    App = QApplication(sys.argv)
+    window = Window()
+    sys.exit(App.exec())
   
   
