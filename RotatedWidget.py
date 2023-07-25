@@ -1,27 +1,46 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 
+def getText():
+    noforcepoint
+def getSeal():
+    noforcepoint
 
 def main():
     import sys
 
-    app = QtWidgets.QApplication(sys.argv)
+    app = QApplication(sys.argv)
 
-    label = QtWidgets.QLabel("Stack Overflow", alignment=QtCore.Qt.AlignCenter)
+    pix = QPixmap('Signature.jpeg')
+    qp = QPainter(pix)
+    pen = QPen(Qt.red, 3)
+    qp.setPen(pen)
+    '''qp.drawLine(10, 10, 50, 50)'''
 
-    graphicsview = QtWidgets.QGraphicsView()
-    scene = QtWidgets.QGraphicsScene(graphicsview)
+    qp.drawText(pix.rect(), Qt.AlignTop, "BlaBla")
+
+    qp.end()
+
+    label = QLabel(alignment=Qt.AlignCenter)
+    label.setPixmap(pix)
+    '''label.setWindowTitle("BlaBla")'''
+
+    graphicsview = QGraphicsView()
+    scene = QGraphicsScene(graphicsview)
     graphicsview.setScene(scene)
 
-    proxy = QtWidgets.QGraphicsProxyWidget()
+    proxy = QGraphicsProxyWidget()
     proxy.setWidget(label)
     proxy.setTransformOriginPoint(proxy.boundingRect().center())
     scene.addItem(proxy)
 
-    slider = QtWidgets.QSlider(minimum=0, maximum=359, orientation=QtCore.Qt.Horizontal)
+    slider = QSlider(minimum=0, maximum=359, orientation=Qt.Horizontal)
     slider.valueChanged.connect(proxy.setRotation)
 
-    label_text = QtWidgets.QLabel(
-        "{}°".format(slider.value()), alignment=QtCore.Qt.AlignCenter
+    label_text = QLabel(
+        "{}°".format(slider.value()), alignment=Qt.AlignCenter
     )
     slider.valueChanged.connect(
         lambda value: label_text.setText("{}°".format(slider.value()))
@@ -29,8 +48,8 @@ def main():
 
     slider.setValue(45)
 
-    w = QtWidgets.QWidget()
-    lay = QtWidgets.QVBoxLayout(w)
+    w = QWidget()
+    lay = QVBoxLayout(w)
     lay.addWidget(graphicsview)
     lay.addWidget(slider)
     lay.addWidget(label_text)
